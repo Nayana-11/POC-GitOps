@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: poc-argocd
+  labels:
+    app: poc-argocd
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: poc-argocd
+  template:
+    metadata:
+      labels:
+        app: poc-argocd
+    spec:
+      containers:
+      - name: poc-argocd
+        image: nginx:latest
+        ports:
+        - containerPort: 80
