@@ -1,0 +1,21 @@
+name: Deploy to Kubernetes via ArgoCD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Trigger ArgoCD Sync
+      uses: h3poteto/argocd-sync-action@v2
+      with:
+        argocd_server: ${{ secrets.ARGOCD_SERVER }}
+        argocd_token: ${{ secrets.ARGOCD_TOKEN }}
+        app_name: my-app
